@@ -8,6 +8,7 @@ Route::view(uri:'/',view:'welcome')->name('Home') ;
 
 Route::view(uri:'contacto',view:'contact')->name('contact');
 Route::get('blog', [PostController::class, 'index'])->name('blog');//entre corchetes para decirle que metodo hay que llamar
+Route::get('blog/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::view(uri:'nosotros',view:'about')->name('about');
 
 /*Route::match(['put', 'patch'], uri:'/', function(){
