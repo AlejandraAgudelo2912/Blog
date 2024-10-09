@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -19,8 +19,7 @@ class PostController extends Controller
     }*/
 
     public function index(){
-        $posts= DB::table('posts')->get();
+        $posts= Post::all();
         return view('blog', compact(var_name: 'posts'));
-        dd($posts);
     }
 }
