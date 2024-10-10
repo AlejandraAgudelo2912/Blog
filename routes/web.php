@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::view(uri:'/',view:'welcome')->name('Home') ;
 
 Route::view(uri:'contacto',view:'contact')->name('contact');
-Route::get('blog', [PostController::class, 'index'])->name('blog');//entre corchetes para decirle que metodo hay que llamar
+Route::get('blog', [PostController::class, 'index'])->name('posts.index');//entre corchetes para decirle que metodo hay que llamar
+Route::get('blog/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('blog', [PostController::class, 'store'])->name('posts.store');
 Route::get('blog/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::view(uri:'nosotros',view:'about')->name('about');
 

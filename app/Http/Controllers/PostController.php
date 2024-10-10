@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use \Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -20,11 +21,30 @@ class PostController extends Controller
 
     public function index(){
         $posts= Post::all();
-        return view('blog', compact(var_name: 'posts'));
+        return view('posts.index', compact(var_name: 'posts'));
     }
-
     public function show(Post $post)
     {
-        
+        //como la variable y el nombre es el mismo se usa compact que e suna funcion integrada de php
+        return view('posts.show', compact('post'));
+        //return 'Detalle del post '.$post->title;
+    }
+
+    public function create()
+    {
+        return view('posts.create');
+
+    }
+
+    public function store(Request $request)
+    {
+        $post = new Post();
+        $post->title=$request->input('title');
+        $post->body=$request->input('body');
+        $post->save();
+
+        session()->flash('status', 'El post se ha creado correctamente');
+
+        return redirect()->route('posts.index');
     }
 }
