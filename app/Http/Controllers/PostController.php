@@ -66,4 +66,10 @@ class PostController extends Controller
 
         return redirect()->route('posts.show', $post)->with('status', 'El post se ha actualizado correctamente');
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('posts.index')->with('status', 'El post se ha eliminado correctamente');
+    }
 }
