@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use \Illuminate\Http\Request;
 
@@ -36,46 +38,32 @@ class PostController extends Controller
 
     }
 
-    public function store(Request $request)
+        public function store(StorePostRequest $request)
     {
-        $request->validate([
+        /*$validated= $request->validate([
             'title' => 'required|min:5',
             'body' => 'required',
-        ]);
+        ]);*/
 
-        $post = new Post();
+        Post::create($request->validated());
+
+        /*$post = new Post();
         $post->title=$request->input('title');
         $post->body=$request->input('body');
-        $post->save();
+        $post->save();*/
 
-        session()->flash('status', 'El post se ha creado correctamente');
-
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('status', 'El post se ha creado correctamente');
     }
 
-    public function createUpdate(Request $request)
-    {
-
-    }
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //$this->store($request);
-        $request->validate([
-            'title' => 'required|min:5',
-            'body' => 'required',
-        ]);
+        $post->update( $request->validated());
 
-        $post->title=$request->input('title');
-        $post->body=$request->input('body');
-        $post->save();
-
-        session()->flash('status', 'El post se ha actualizado correctamente');
-
-        return redirect()->route('posts.show', $post);
+        return redirect()->route('posts.show', $post)->with('status', 'El post se ha actualizado correctamente');
     }
 }
