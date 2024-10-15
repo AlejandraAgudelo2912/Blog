@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['post' => new Post]);
 
     }
 
@@ -53,6 +53,10 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    public function createUpdate(Request $request)
+    {
+
+    }
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
