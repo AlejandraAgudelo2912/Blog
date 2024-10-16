@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie_edge">
     <title>{{$metaTitle ?? 'DefaultTitle'}}</title>
     <meta name="description" content="{{$metaDescription ?? 'Default Description'}}">
-
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
 <body class="font-sans antialiased dark:big-black dark:text-white/50">
