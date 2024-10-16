@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,21 +9,18 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
-<body class="font-sans antialiased dark:big-black dark:text-white/50">
+<body class="flex h-screen flex-col bg-slate-100 selection:bg-sky-600 selection:text-sky-50 dark:bg-slate-950">
+<!--dark:bg-slate-950  para el modo oscuro-->
 <x-partials.navigation/>
 @session('status')
 <div>
     {{ $value }}
 </div>
 @endsession
-{{$slot}}
-@isset($sidebar)
-    <!--no hace falta ek if porque el blade este lo traduce al if-->
+<main class="flex-1 p-4">
+    {{$slot}}
+</main>
 
-    <div id="sidebar">
-        <h3>Sidebar</h3>
-        {{$sidebar}}
-    </div>
-@endisset
+
 </body>
 </html>
