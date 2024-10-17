@@ -200,7 +200,6 @@
                             stroke="currentColor"
                             stroke-width="1.5"
 
-                            Carlos Abrisqueta, [16/10/2024 16:34]
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
