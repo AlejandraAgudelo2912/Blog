@@ -9,6 +9,11 @@ use \Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     //un controlador invocable solo puede hacer una unica accion, este es un controlador invocable
     /*public function __invoke()//pf y tabulador
     {
