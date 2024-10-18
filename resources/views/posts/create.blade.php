@@ -13,9 +13,7 @@
                     <form method="POST" action="{{route('posts.store')}}">
                         @csrf
                         @include('posts.form-fields')
-                        <br>
-                        <button type="submit"> {{__('Send')}}</button>
-                        <br>
+                        <x-primary-button type="submit" class="mt-4">{{__('Send')}}</x-primary-button>
                     </form>
                 </div>
             </div>
