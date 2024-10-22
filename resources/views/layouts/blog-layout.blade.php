@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie_edge">
-    <title>{{$metaTitle ?? 'DefaultTitle'}}</title>
-    <meta name="description" content="{{$metaDescription ?? 'Default Description'}}">
+    <title>{{$metaTitle}}</title>
+    <meta name="description" content="{{$metaDescription}}">
     @vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
 <body class="flex h-screen flex-col bg-slate-100 selection:bg-sky-600 selection:text-sky-50 dark:bg-slate-950">
 <!--dark:bg-slate-950  para el modo oscuro-->
-<x-partials.navigation/>
+@include('layouts.blog-navigation')
 @session('status')
 <div class="bg-green-600 p-4 text-xl text-green-50 dark:bg-green-800">
     {{ $value }}
