@@ -66,9 +66,12 @@ if(themeMenu){
         .addEventListener("click", () =>
             themeMenu.classList.toggle("hidden")
         );
+
+
     const toggleMobileMenu = document.getElementById(
         "toggle-mobile-menu"
     );
+
     toggleMobileMenu.addEventListener("click", () => {
         document.getElementById("mobile-menu").classList.toggle("hidden");
         document

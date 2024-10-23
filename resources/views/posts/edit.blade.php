@@ -11,12 +11,13 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form method="POST" action="{{route('posts.update',$post)}}" class="space-y-4 max-w-xl">
+                        @method('PATCH')
+                        @csrf
 
                         @include('posts.form-fields')
                         <x-primary-button type="submit" class="mt-4">{{__('Save')}}</x-primary-button>
 
-                        @csrf
-                        @method('PATCH')
+
                     </form>
                 </div>
             </div>

@@ -26,7 +26,13 @@ Route::view(uri:'nosotros',view:'about')->name('about');
     return 'This is a patch request';
 });*/
 
+Route::get('/login', function () {
+    return view('auth.login');
 
+});
+Route::get('/register', function () {
+    return view('auth.register');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

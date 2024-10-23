@@ -235,17 +235,82 @@
                     </button>
                 </div>
             </div>
-            <button
-                class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
-            >
-                <img
-                    class="h-6 w-6 rounded-full"
-                    src="https://ui-avatars.com/api?name=Jorge+Garcia"
-                    alt="Jorge García"
-                />
-            </button>
+
+            @guest
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                            <div>
+                                <button
+                                    class="mb-1"
+                                >
+                                    <div>
+                                        <img
+                                            class="h-6 w-6 rounded-full"
+                                            src="https://ui-avatars.com/api?name=Jorge+Garcia"
+                                            alt="Jorge García"
+                                        />
+                                    </div>
+                                </button>
+
+                            </div>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('login')" >
+                            {{ __('Login') }}
+                        </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Register') }}
+                            </x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
+
         </div>
+            @endguest
+            @auth
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <div>
+                            <button
+                                class="mb-1"
+                            >
+                                <div>
+                                    <img
+                                        class="h-6 w-6 rounded-full"
+                                        src="https://ui-avatars.com/api?name=Jorge+Garcia"
+                                        alt="Jorge García"
+                                    />
+                                </div>
+                            </button>
+
+                        </div>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+        </div>
+            @endauth
+
     </div>
+
+
     <div
         id="mobile-menu"
         class="hidden space-y-1 border-t pb-3 pt-2 dark:border-slate-500"

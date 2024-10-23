@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body','published_at'];
     //protected $table = 'articles';//si le camniamos el nombre en la base de datos a posts a articles con nombrarla aqi sobra.
 }
