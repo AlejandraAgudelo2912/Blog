@@ -27,7 +27,7 @@ class PostController extends Controller
     }*/
 
     public function index(){
-        $posts= Post::all();
+        $posts= Post::query()->where('publish_at','<=',now())->get();
         return view('posts.index', compact(var_name: 'posts'));
     }
     public function show(Post $post)

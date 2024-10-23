@@ -13,4 +13,7 @@
     <x-textarea id="body" name="body" class="block w-full mt-1">{{old('body',$post->body)}}</x-textarea>
     <x-input-error :messages="$errors->get('body')"></x-input-error>
 </div>
-
+<div>
+    <x-input-label for="publish_at" :value="__('Publish date')" ></x-input-label>
+    <x-text-input type="date" id="publish_at" name="publish_at" value="{{old('publish_at', $post->publish_at)}}"></x-text-input>
+</div>
