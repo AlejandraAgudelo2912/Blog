@@ -125,12 +125,5 @@
                 praesentium numquam possimus quaerat doloribus!
                 Praesentium, provident accusantium.
             </p>--}}
-            <div
-                class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl"
-            >
-                <p>
-                    {{ $post->publish_at }}
-                </p>
-        </div>
     </article>
 </x-blog-layout>

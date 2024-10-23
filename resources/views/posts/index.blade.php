@@ -32,7 +32,6 @@
             class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3"
         >
             @foreach($posts as $post)
-                @if($post->publish_at<now())
                 <article
                     class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900"
                 >
@@ -64,11 +63,7 @@
                         >
                             {{ $post->body }}
                         </p>
-                        <p
-                            class="hidden text-slate-500 dark:text-slate-400 md:block "
-                        >Fecha de publicación
-                            {{ $post->publish_at }}
-                        </p>
+                        
                     </div>
                     {{--<div class="flex space-x-2 p-5">
                         <img
@@ -88,7 +83,6 @@
                         </div>
                     </div>--}}
                 </article>
-                @endif
             @endforeach
         </div>
 
