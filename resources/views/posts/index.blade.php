@@ -31,6 +31,7 @@
         <div
             class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3"
         >
+
             @foreach($posts as $post)
                 <article
                     class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900"

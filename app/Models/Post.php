@@ -9,5 +9,9 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'body','publish_at'];
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
     //protected $table = 'articles';//si le camniamos el nombre en la base de datos a posts a articles con nombrarla aqi sobra.
 }
