@@ -27,6 +27,13 @@
                 </svg>
             </a>
         </div>
+
+            <div class="flex items-center justify-left">
+
+                <x-primary-button>
+                    <a href="{{route('posts.my-posts')}}" >Mis posts</a>
+                </x-primary-button>
+            </div>
         @endauth
         <div
             class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3"

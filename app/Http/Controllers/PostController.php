@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -49,13 +52,16 @@ class PostController extends Controller
             'title' => 'required|min:5',
             'body' => 'required',
         ]);*/
+        //Post::create($request->validated());
 
-        Post::create($request->validated());
 
-        /*$post = new Post();
+        $post = new Post();
         $post->title=$request->input('title');
         $post->body=$request->input('body');
-        $post->save();*/
+        $post->publish_at=$request->input('publish_at');
+
+        $post->user_id=Auth::id();
+        $post->save();
 
         return redirect()->route('posts.index')->with('status', 'El post se ha creado correctamente');
     }
@@ -76,6 +82,16 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('posts.index')->with('status', 'El post se ha eliminado correctamente');
+    }
+
+    public function myPosts()
+    {
+        $user=Auth::user();
+        //$posts=Post::query()->where('user_id', $user->id)->get();
+
+        $posts= User::find($user->id)->posts()->get();
+
+        return view('posts.my-posts', compact('posts'));
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePostRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|min:5',
             'body' => 'required',
-            'publish_at'=>'required|date',
+            'publish_at'=>'required',
         ];
     }
 }
