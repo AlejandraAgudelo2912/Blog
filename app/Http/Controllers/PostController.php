@@ -52,16 +52,15 @@ class PostController extends Controller
             'title' => 'required|min:5',
             'body' => 'required',
         ]);*/
-        //Post::create($request->validated());
+        Post::create(array_merge($request->validated(),['user_id' => auth()->id()]));
 
-
-        $post = new Post();
+        /*$post = new Post();
         $post->title=$request->input('title');
         $post->body=$request->input('body');
         $post->publish_at=$request->input('publish_at');
 
         $post->user_id=Auth::id();
-        $post->save();
+        $post->save();*/
 
         return redirect()->route('posts.index')->with('status', 'El post se ha creado correctamente');
     }

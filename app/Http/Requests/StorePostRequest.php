@@ -26,6 +26,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|min:5',
             'body' => 'required',
             'publish_at'=>'required',
+
         ];
     }
 }

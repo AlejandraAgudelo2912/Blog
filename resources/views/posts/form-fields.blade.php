@@ -16,4 +16,6 @@
 <div>
     <x-input-label for="publish_at" :value="__('Publish date')" ></x-input-label>
     <x-text-input type="date" id="publish_at" name="publish_at" value="{{old('publish_at', $post->publish_at)}}"></x-text-input>
+    <x-input-error :messages="$errors->get('publish_at')"></x-input-error>
+
 </div>
