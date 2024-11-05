@@ -52,7 +52,7 @@ class PostController extends Controller
             'title' => 'required|min:5',
             'body' => 'required',
         ]);*/
-        Post::create(array_merge($request->validated(),['user_id' => auth()->id()]));
+        Post::create(array_merge($request->validated()+['user_id' => auth()->id()]));
 
         /*$post = new Post();
         $post->title=$request->input('title');
