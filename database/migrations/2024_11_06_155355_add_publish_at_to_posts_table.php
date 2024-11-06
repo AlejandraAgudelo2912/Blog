@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->text('body')->after('title');
+            //$table->date('publish_at')->nullable()->after('body');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('body');
+            $table->dropColumn('publish_at');
         });
     }
 };

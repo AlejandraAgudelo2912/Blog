@@ -19,6 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
+            'publish_at'=>random_int(0,2)? $this->faker->dateTimeBetween('-1 month', '+1 month') : null,
         ];
     }
 }

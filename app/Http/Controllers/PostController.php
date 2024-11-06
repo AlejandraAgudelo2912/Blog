@@ -39,6 +39,7 @@ class PostController extends Controller
 
     public function create()
     {
+        $posts=Post::where('publish_at','<=', now() )->get();
         return view('posts.create', ['post' => new Post]);
 
     }
