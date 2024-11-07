@@ -27,7 +27,7 @@ class PostController extends Controller
     }*/
 
     public function index(){
-        $posts= Post::all();
+        $posts=Post::where('publish_at','<=', now() )->get();
         return view('posts.index', compact(var_name: 'posts'));
     }
     public function show(Post $post)
@@ -39,7 +39,6 @@ class PostController extends Controller
 
     public function create()
     {
-        $posts=Post::where('publish_at','<=', now() )->get();
         return view('posts.create', ['post' => new Post]);
 
     }
@@ -50,8 +49,7 @@ class PostController extends Controller
             'title' => 'required|min:5',
             'body' => 'required',
         ]);*/
-
-        Post::create($request->validated());
+        auth()->user()->posts()->create($request->validated());
 
         /*$post = new Post();
         $post->title=$request->input('title');
