@@ -76,4 +76,11 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with('status', 'El post se ha eliminado correctamente');
     }
+
+    public function userPosts()
+    {
+        $posts=auth()->user()->posts;
+        return view('posts.index', compact(var_name: 'posts'));
+
+    }
 }

@@ -8,6 +8,9 @@ Route::view(uri:'/',view:'welcome')->name('Home') ;
 
 Route::view(uri:'contacto',view:'contact')->name('contact');
 
+Route::get('blog/myposts', [PostController::class, 'userPosts'])
+    ->name('blog.myposts');
+
 Route::resource('blog',PostController::class)//solo para las siete rutas estandars
     ->names('posts')
     ->parameters(['blog' => 'post'])//que mierda es esto
