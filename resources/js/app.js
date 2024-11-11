@@ -16,7 +16,7 @@ const themeMenu = document.getElementById("theme-menu");
 if(themeMenu){
     const themeOptions = document.querySelectorAll(
         "[data-theme-option]"
-    );
+    )
     const isDarkMode = window.matchMedia(
         "(prefers-color-scheme: dark)"
     );

@@ -83,6 +83,11 @@
                     </div>--}}
                 </article>
             @endforeach
+
+        </div>
+
+        <div class="mt-3 pagination">
+            {{ $posts->links() }}
         </div>
 
     </div>

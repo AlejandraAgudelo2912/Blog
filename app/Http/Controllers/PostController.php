@@ -6,7 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use \Illuminate\Http\Request;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 class PostController extends Controller
 {
 
@@ -27,7 +27,8 @@ class PostController extends Controller
     }*/
 
     public function index(){
-        $posts=Post::where('publish_at','<=', now() )->get();
+        $posts=Post::where('publish_at','<=', now() )->paginate(5);
+
         return view('posts.index', compact(var_name: 'posts'));
     }
     public function show(Post $post)
@@ -79,7 +80,7 @@ class PostController extends Controller
 
     public function userPosts()
     {
-        $posts=auth()->user()->posts;
+        $posts=auth()->user()->posts()->paginate(5);
         return view('posts.index', compact(var_name: 'posts'));
 
     }
