@@ -269,7 +269,6 @@
                                 {{ __('Register') }}
                             </x-dropdown-link>
 
-
                         </x-slot>
                     @endguest
             </x-dropdown>

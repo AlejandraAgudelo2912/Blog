@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -11,10 +13,15 @@ Route::view(uri:'contacto',view:'contact')->name('contact');
 Route::get('blog/myposts', [PostController::class, 'userPosts'])
     ->name('blog.myposts');
 
+
 Route::resource('blog',PostController::class)//solo para las siete rutas estandars
     ->names('posts')
     ->parameters(['blog' => 'post'])//que mierda es esto
 ;
+
+Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+
 /*Route::get('blog', [PostController::class, 'index'])->name('posts.index');//entre corchetes para decirle que metodo hay que llamar
 Route::get('blog/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('blog', [PostController::class, 'store'])->name('posts.store');

@@ -9,11 +9,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'body','publish_at','user_id'];
+    protected $fillable = ['title', 'body','publish_at','user_id','category_id'];
     //protected $table = 'articles';//si le camniamos el nombre en la base de datos a posts a articles con nombrarla aqi sobra.
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category() :BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

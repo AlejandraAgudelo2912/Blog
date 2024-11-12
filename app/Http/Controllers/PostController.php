@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use \Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -26,10 +27,19 @@ class PostController extends Controller
         return view('blog', compact(var_name: 'posts'));
     }*/
 
-    public function index(){
-        $posts=Post::where('publish_at','<=', now() )->paginate(5);
+    public function index(Request $request)
+    {
+        $categories = Category::all();
 
-        return view('posts.index', compact(var_name: 'posts'));
+        $query = Post::where('publish_at', '<=', now());
+
+        if ($request->has('category_id') && $request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $posts = $query->paginate(5);
+
+        return view('posts.index', compact('posts', 'categories'));
     }
     public function show(Post $post)
     {
@@ -40,7 +50,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create', ['post' => new Post]);
+        $categories = Category::all();
+        return view('posts.create', ['post' => new Post,'categories' => $categories]);
 
     }
 
@@ -81,7 +92,7 @@ class PostController extends Controller
     public function userPosts()
     {
         $posts=auth()->user()->posts()->paginate(5);
-        return view('posts.index', compact(var_name: 'posts'));
+        return view('posts.my-posts', compact(var_name: 'posts'));
 
     }
 }

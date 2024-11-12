@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,13 +23,18 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'role'=>'admin'
             ]);
+
         User::factory(5)->create();
+        Category::factory(5)->create();
 
-        $users=User::all();
+        $categories = Category::all();
 
-        $users->each(function($user){
-            $user->posts()->saveMany(Post::factory(10)->make());//el save many ya accede a la base de datos por tanto aqui no necesitamos crear un create y el make lo hcae en memoria osea no toca la base de datos
-
+        User::all()->each(function($user) use ($categories) {
+            Post::factory(10)->create([
+                'user_id' => $user->id,
+                'category_id' => $categories->random()->id,
+            ]);
         });
+
     }
 }
