@@ -36,7 +36,29 @@ class PostController extends Controller
         if ($request->has('category_id') && $request->category_id) {
             $query->where('category_id', $request->category_id);
         }
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('body', 'LIKE', "%{$search}%")
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('name', 'LIKE', "%{$search}%");
+                    });
+            });
+        }
+        if ($request->has('sort')) {
+            $sort = $request->sort;
 
+            if ($sort == 'date') {
+                $query->orderBy('publish_at', 'desc');
+            } elseif ($sort == 'name') {
+                $query->orderBy('title', 'asc');
+            }elseif ($sort=='date-asc'){
+                $query->orderBy('publish_at', 'asc');
+            }
+        } else {
+            $query->orderBy('publish_at', 'desc');
+        }
         $posts = $query->paginate(5);
 
         return view('posts.index', compact('posts', 'categories'));
@@ -44,7 +66,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //como la variable y el nombre es el mismo se usa compact que e suna funcion integrada de php
-        return view('posts.show', compact('post'));
+        $category = $post->category;
+        return view('posts.show', compact('post', 'category'));
         //return 'Detalle del post '.$post->title;
     }
 
@@ -73,7 +96,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     public function update(UpdatePostRequest $request, Post $post)
@@ -91,8 +115,9 @@ class PostController extends Controller
 
     public function userPosts()
     {
+        $categories = Category::all();
         $posts=auth()->user()->posts()->paginate(5);
-        return view('posts.my-posts', compact(var_name: 'posts'));
+        return view('posts.my-posts', compact( 'posts', 'categories'));
 
     }
 }

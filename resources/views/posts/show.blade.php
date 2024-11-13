@@ -99,6 +99,9 @@
             <p>
                 {{ $post->body }}
             </p>
+            <p>
+                {{ $category->name }}
+            </p>
             {{--<ul>
                 <li>List item 1</li>
                 <li>List item 2</li>

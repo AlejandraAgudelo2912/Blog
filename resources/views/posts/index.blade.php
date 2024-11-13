@@ -1,9 +1,16 @@
 <x-blog-layout meta-title="Blog" meta-description="Descripcion de la pagina del blog">
     <div class="mx-auto mt-4 max-w-6xl">
-        <h1 class="my-5 text-center font-serif text-4xl font-extrabold text-sky-600 md:text-5xl">
-            Blog
-        </h1>
 
+        <form method="GET" action="{{ route('posts.index') }}" class="mb-4">
+            <x-text-input type="text" name="search" placeholder="Buscar"
+                   value="{{ request('search') }}" class="ml-96"/>
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                Buscar
+            </button>
+        </form>
+            <h1 class="my-5 text-center font-serif text-4xl font-extrabold text-sky-600 md:text-5xl">
+                Blog
+            </h1>
         @auth
             <div class="flex items-center justify-center">
                 <a
@@ -43,16 +50,43 @@
             </x-slot>
 
             <x-slot name="content">
-                <x-dropdown-link :href="route('posts.index', ['category_id' => ''])">
-                    Categorias
+                <x-dropdown-link :href="route('posts.index', ['category_id' => '','sort' => request('sort'),'search' => request('search')])">
+                    Todas las Categorias
                 </x-dropdown-link>
                 @foreach($categories as $category)
-                    <x-dropdown-link :href="route('posts.index', ['category_id' => $category->id])">
+                    <x-dropdown-link :href="route('posts.index', ['category_id' => $category->id, 'sort' => request('sort'),'search' => request('search')])">
                         {{ $category->name }}
                     </x-dropdown-link>
                 @endforeach
             </x-slot>
         </x-dropdown>
+        <div class="mt-2 mb-4">
+            <x-dropdown align="left" width="48">
+                <x-slot name="trigger">
+                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <div>Ordenar por</div>
+
+                        <div class="ms-1">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('posts.index',['sort' => 'date', 'category_id' => request('category_id'),'search' => request('search')])">
+                        Más recientes
+                    </x-dropdown-link>
+                    <x-dropdown-link :href="route('posts.index',['sort' => 'date-asc','category_id' => request('category_id'),'search' => request('search')])">
+                        Más antiguos
+                    </x-dropdown-link>
+                    <x-dropdown-link :href="route('posts.index',['sort' => 'name','category_id' => request('category_id'),'search' => request('search')])">
+                        Orden alfabético
+                    </x-dropdown-link>
+                </x-slot>
+            </x-dropdown>
+        </div>
 
         <div
             class="mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3"
